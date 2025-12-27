@@ -1,0 +1,49 @@
+:root{
+  --bg:#0f1724;
+  --card:#0b1220;
+  --glass: rgba(255,255,255,0.03);
+  --accent:#06b6d4;
+  --muted: #9aa6b2;
+  --text: #e6eef6;
+  --radius:14px;
+  --maxwidth:1100px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:
+linear-gradient(180deg,#071022 0%, #081225 50%, #03101a 100%);color:var(--text);-webkit-font-smoothing:antialiased}
+.container{max-width:var(--maxwidth);margin:24px auto;padding:16px}
+.site-header{padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+.header-inner{display:flex;flex-direction:column;gap:6px}
+.brand{font-weight:700;font-size:18px;color:var(--accent)}
+.small{font-size:13px;color:var(--muted)}
+
+.main-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+@media (max-width:900px){ .main-grid{grid-template-columns:1fr} }
+
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px;border-radius:var(--radius);box-shadow:0 8px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+.muted{color:var(--muted)}
+.center{text-align:center}
+.schedule-list{list-style:none;padding:0;margin-top:12px;display:grid;gap:8px}
+.schedule-list li{display:flex;justify-content:space-between;padding:10px;border-radius:10px;background:var(--glass);align-items:center;border:1px solid rgba(255,255,255,0.02)}
+.schedule-list li .date{font-weight:600}
+.schedule-list li .sub{font-size:14px;color:var(--muted)}
+
+.exam-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.timer{background:rgba(255,255,255,0.03);padding:8px 12px;border-radius:10px;font-weight:700}
+
+#questionsList{display:grid;gap:12px;max-height:56vh;overflow:auto;padding-right:6px}
+.q-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+.q-text{margin-bottom:10px}
+.options label{display:block;padding:8px;border-radius:8px;margin-bottom:6px;background:rgba(255,255,255,0.01);cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+.options input{margin-right:8px}
+
+.exam-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.exam-actions input[type="text"], .exam-actions input[type="email"]{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);min-width:180px}
+.btn{background:linear-gradient(90deg,var(--accent),#60e0ff);color:#012; padding:10px 16px;border-radius:8px;border:none;font-weight:700;cursor:pointer}
+.btn:active{transform:translateY(1px)}
+.hidden{display:none}
+.result-card{margin-top:12px;padding:16px}
+.small{font-size:13px}
+
+.site-footer{margin-top:30px;padding:12px;text-align:center;color:var(--muted);font-size:13px}
