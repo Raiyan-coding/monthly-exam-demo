@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ahoron — Results (Personal & Official)</title>
+
+  <!-- BIG embedded CSS (heavy styling as requested) -->
+
+
+
+
+  <style>
+  :root {
+  --bg: #0a0f1f;
+  --card: #0f1729;
+  --muted: #94a3b8;
+  --accent: #0ea5e9;
+  --glass: rgba(255, 255, 255, 0.05);
+  --card-contrast: #142038;
+  --white: #f1f5f9;
+  --border: rgba(255, 255, 255, 0.06);
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Reset + base */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(135deg, #0a0f1f 0%, #0f1729 50%, #0a1225 100%);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+header.site-header {
+  padding: 24px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--card-contrast), #0a1225);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 24px;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+@media (max-width: 1100px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cards */
+.card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+h1, h2, h3 {
+  margin: 0 0 16px 0;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Left column sections */
+.section {
+  margin-bottom: 24px;
+}
+
+.section .section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section .section-title h3 {
+  margin: 0;
+}
+
+.info-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: var(--glass);
+  padding: 6px 12px;
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  border: 1px solid var(--border);
+  font-weight: 500;
+}
+
+/* Monthly summary table */
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 16px;
+  align-items: start;
+}
+
+.summary-card {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  backdrop-filter: blur(5px);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 8px;
+  border-radius: 8px;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.summary-row:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.summary-row + .summary-row {
+  margin-top: 6px;
+}
+
+.summary-key {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.summary-value {
+  font-weight: 600;
+  color: var(--white);
+  font-size: 15px;
+}
+
+/* Recent exams list */
+.exam-list {
+  display: grid;
+  gap: 12px;
+  max-height: 60vh;
+  overflow: auto;
+  padding-right: 6px;
+}
+
+.exam-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.exam-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.exam-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.exam-item {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.exam-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.exam-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+}
+
+.exam-meta {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Per-question details: black background & white text */
+pre.details {
+  background: #000;
+  color: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  overflow: auto;
+  max-height: 380px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-sm);
+  margin-top: 12px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Right column: Official ranking + timeline */
+.timeline {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.timeline button {
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  border-radius: 20px;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.timeline button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent);
+  color: var(--white);
+}
+
+.timeline button.active {
+  background: var(--accent);
+  color: #0a0f1f;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+  border-color: var(--accent);
+}
+
+.ranking-list {
+  display: grid;
+  gap: 10px;
+  max-height: 70vh;
+  overflow: auto;
+  padding-right: 6px;
+}
+
+.ranking-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ranking-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.ranking-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.rank-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rank-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(4px);
+}
+
+.rank {
+  width: 38px;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 18px;
+}
+
+.rank-info {
+  flex: 1;
+  font-weight: 500;
+}
+
+.rank-stats {
+  width: 140px;
+  text-align: right;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* controls at bottom for copy/download/send personal combined */
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.btn, .btn-ghost {
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border);
+}
+
+.btn {
+  background: var(--accent);
+  color: #0a0f1f;
+  border-color: var(--accent);
+}
+
+.btn:hover {
+  background: #0284c7;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--muted);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--white);
+  border-color: var(--accent);
+}
+
+footer.site-footer {
+  margin-top: 32px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* Mobile improvements */
+@media (max-width: 600px) {
+  .container {
+    max-width: 100%;
+    margin: 12px;
+    padding: 12px;
+  }
+  
+  header.site-header {
+    padding: 16px;
+    border-radius: 12px;
+  }
+  
+  .brand {
+    font-size: 20px;
+  }
+  
+  .subtitle {
+    font-size: 12px;
+  }
+  
+  main {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .summary-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .summary-card {
+    padding: 14px;
+  }
+  
+  .timeline {
+    flex-wrap: nowrap;
+    overflow: auto;
+  }
+  
+  .timeline button {
+    padding: 8px 12px;
+  }
+  
+  .exam-list {
+    max-height: none;
+  }
+  
+  pre.details {
+    max-height: 240px;
+  }
+  
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .btn, .btn-ghost {
+    padding: 12px 16px;
+    border-radius: 10px;
+  }
+  
+  .exam-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .rank-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .rank-stats {
+    width: auto;
+    text-align: left;
+    margin-top: 8px;
+  }
+}
+
+/* Additional professional touches */
+details summary {
+  font-weight: 500;
+  padding: 8px 0;
+  cursor: pointer;
+  outline: none;
+  color: var(--accent);
+  transition: color 0.2s ease;
+}
+
+details summary:hover {
+  color: #0ea5e9;
+}
+
+code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 0.9em;
+}
+  </style>
+
+
+
+
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="brand">Ahoron — Results</div>
+        <button id="btnBack" class="btn" style="padding:8px 14px;font-weight:600;font-size:0.85rem">Back</button>
+      </div>
+      <div class="subtitle">Your Monthly summary (auto from this browser) • Recent exams • Official rankings (developer's result.json)</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- LEFT: Primary personal UI -->
+    <div>
+      <!-- Your Monthly Summary -->
+      <section class="card section" id="monthlySummaryCard">
+        <div class="section-title">
+          <h3>Your Monthly Summary (current Dhaka month)</h3>
+          <div class="badge" id="monthBadge">Loading...</div>
+        </div>
+
+        <div id="monthlySummaryArea" class="summary-grid">
+          <!-- summary left (per-subject list) and right (totals & actions) injected by JS -->
+          <div class="summary-card" id="perSubjectList">Loading your monthly exams...</div>
+          <div class="summary-card" id="summaryTotals">
+            <div style="font-weight:800;font-size:18px;margin-bottom:8px">Summary</div>
+            <div class="summary-row"><div class="summary-key">Exams included</div><div id="totalExams" class="summary-value">—</div></div>
+            <div class="summary-row"><div class="summary-key">Total correct</div><div id="totalCorrect" class="summary-value">—</div></div>
+            <div class="summary-row"><div class="summary-key">Total questions</div><div id="totalQuestions" class="summary-value">—</div></div>
+            <div class="summary-row"><div class="summary-key">Combined %</div><div id="totalPercent" class="summary-value">—</div></div>
+
+            <div class="actions" style="margin-top:12px">
+              <button id="btnCopyCombined" class="btn">Copy Combined JSON</button>
+              <button id="btnDownloadCombined" class="btn-ghost">Download JSON</button>
+              <button id="btnSendCombined" class="btn-ghost">Send to Developer</button>
+            </div>
+            <div class="small" style="margin-top:10px" id="combinedHint"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Exams (detailed) -->
+      <section class="card section" id="recentExamsCard">
+        <div class="section-title">
+          <h3>Recent Exams (detailed)</h3>
+          <div class="badge">Auto from localStorage</div>
+        </div>
+
+        <div id="recentExamsArea" class="exam-list">
+          <!-- recent exams injected here -->
+        </div>
+      </section>
+    </div>
+
+    <!-- RIGHT: Official Rankings (result.json) + timeline -->
+    <aside>
+      <section class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div>
+            <h3 style="margin:0">Official Rankings</h3>
+            <div class="small muted">From <code>result.json</code> (developer publishes)</div>
+          </div>
+          <div class="small muted" id="rankingHint">Loading...</div>
+        </div>
+
+        <div class="timeline" id="timeline"></div>
+        <div id="rankingArea" class="ranking-list">
+          <!-- ranking rows inserted here -->
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="site-footer">Built for Ahoron • Personal data lives in your browser (localStorage)</footer>
+
+  <script>
+  /*************************************************************************
+   Result page logic (auto personal monthly summary + recent exams + ranking)
+   - Uses the same localStorage keys as main.js:
+       - aq_submissions: array of {id, contentObj}
+       - aq_personal: map key-> array of personal records (legacy)
+       - aq_studentEmail / aq_studentName: last used identity (local)
+       - aq_published: published combined by month (Plan B)
+   - Auto-detects current user from localStorage.aq_studentEmail then aq_studentName.
+   - Monthly summary: picks up to last 12 records in the current Dhaka month and aggregates per-subject.
+  *************************************************************************/
+
+  // ---------- helpers ----------
+  function nowDhaka(){ const now=new Date(); const utc = now.getTime() + now.getTimezoneOffset()*60000; return new Date(utc + 6*60*60000); }
+  function currentMonthId(){ const d=nowDhaka(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`; }
+  function monthLabel(mid){ if(!mid) return 'Unknown'; const [y,m]=mid.split('-').map(Number); return new Date(y,m-1,1).toLocaleString(undefined,{month:'short',year:'numeric'}); }
+  function escapeHtml(s){ return String(s===null||s===undefined?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  // read local storage helpers
+  function readSubmissionsRaw(){
+    try{ return JSON.parse(localStorage.getItem('aq_submissions')||'[]').map(s=> s.contentObj || s.content || s); }catch(e){ return []; }
+  }
+  function readPersonalMap(){ try{ return JSON.parse(localStorage.getItem('aq_personal')||'{}'); }catch(e){ return {}; } }
+  function readPublished(){ try{ return JSON.parse(localStorage.getItem('aq_published')||'{}'); }catch(e){ return {}; } }
+
+  // find identity: prefer saved last used student in localStorage (set by main.js)
+  function detectCurrentUserRaw(){
+    const email = (localStorage.getItem('aq_studentEmail')||'').trim();
+    if(email) return email;
+    const name = (localStorage.getItem('aq_studentName')||'').trim();
+    if(name) return name;
+    // fallback: if exactly one key in aq_personal, return that key
+    const map = readPersonalMap();
+    const keys = Object.keys(map||{});
+    if(keys.length===1) return keys[0];
+    return null;
+  }
+
+  // find personal records by raw identity (tries normalized keys then scans raw submissions)
+  function findPersonalRecordsByRaw(raw){
+    if(!raw) return [];
+    const normalized = raw.trim().toLowerCase();
+    const map = readPersonalMap();
+    if(map[normalized] && Array.isArray(map[normalized]) && map[normalized].length) return map[normalized].slice().sort((a,b)=> (b.timestamp_utc||'').localeCompare(a.timestamp_utc||''));
+    if(map[raw] && Array.isArray(map[raw]) && map[raw].length) return map[raw].slice().sort((a,b)=> (b.timestamp_utc||'').localeCompare(a.timestamp_utc||''));
+    // fallback scan raw submissions
+    const subs = readSubmissionsRaw();
+    const found = subs.filter(c=>{
+      const em = (c.studentEmail||'').toString().trim().toLowerCase();
+      const nm = (c.studentName||'').toString().trim().toLowerCase();
+      return em === normalized || nm === normalized;
+    }).sort((a,b)=> (b.timestamp_utc||'').localeCompare(a.timestamp_utc||''));
+    return found;
+  }
+
+  // utility: group array by key function
+  function groupBy(arr, fn){
+    const out = {};
+    arr.forEach(x => {
+      const k = fn(x);
+      out[k] = out[k] || [];
+      out[k].push(x);
+    });
+    return out;
+  }
+
+  // ---------- build monthly summary for current user ----------
+  function buildMonthlySummaryFor(raw){
+    const monthId = currentMonthId();
+    // get personal records matching this raw identity and filter to monthId
+    const all = findPersonalRecordsByRaw(raw);
+    const monthly = all.filter(r => (r.timestamp_utc||'').startsWith(monthId)).slice(0, 1000); // keep order newest-first
+    // take last 12 (newest) exams in the month
+    const last12 = monthly.slice(0, 12);
+    // aggregate per-subject using latest per subject among these (or sum if you prefer)
+    const perSubject = {};
+    last12.forEach(r=>{
+      const sid = r.subjectId || ('subject-'+Math.random().toString(36).slice(2,6));
+      // keep each occurrence — user wanted to include all up to 12 exams, so preserve duplicates
+      perSubject[sid] = perSubject[sid] || { subjectName: r.subjectName || sid, occurrences: [] };
+      perSubject[sid].occurrences.push(r);
+    });
+
+    // compute totals (sum correct and totalQuestions across chosen last12)
+    const totals = last12.reduce((acc,r)=>{
+      acc.correct += (r.correctCount||0);
+      acc.total += (r.totalQuestions||0);
+      acc.time += (r.timeTakenSec||0);
+      return acc;
+    }, { correct:0, total:0, time:0 });
+
+    return { monthId, monthLabel: monthLabel(monthId), countIncluded: last12.length, last12, perSubject, totals };
+  }
+
+  // ---------- render helpers ----------
+  function renderMonthlySummaryBlock(raw){
+    const targetArea = document.getElementById('perSubjectList');
+    const totalsArea = document.getElementById('summaryTotals');
+    const badge = document.getElementById('monthBadge');
+    if(!raw){
+      targetArea.innerHTML = `<div class="small muted">No identity detected. Take an exam (enter name/email) to make your results appear here.</div>`;
+      document.getElementById('totalExams').textContent = '—';
+      document.getElementById('totalCorrect').textContent = '—';
+      document.getElementById('totalQuestions').textContent = '—';
+      document.getElementById('totalPercent').textContent = '—';
+      badge.textContent = monthLabel(currentMonthId());
+      document.getElementById('combinedHint').textContent = 'No local identity saved. The page auto-detects the last used name/email in this browser.';
+      return;
+    }
+
+    const out = buildMonthlySummaryFor(raw);
+    badge.textContent = out.monthLabel;
+
+    // left: per-subject breakdown (list of subject blocks)
+    let leftHtml = '';
+    if(out.countIncluded === 0){
+      leftHtml = `<div class="small muted">No exams found for ${escapeHtml(out.monthLabel)} under your identity (${escapeHtml(raw)}). Take exams during the month to build a monthly summary.</div>`;
+    } else {
+      // For each subject included, show occurrences and their correct/total
+      Object.keys(out.perSubject).forEach(sid=>{
+        const p = out.perSubject[sid];
+        leftHtml += `<div style="margin-bottom:8px"><div style="font-weight:700">${escapeHtml(p.subjectName)}</div>`;
+        p.occurrences.forEach((occ, idx)=>{
+          leftHtml += `<div class="summary-row" style="margin-top:6px;padding:8px;background:rgba(255,255,255,0.01)"><div class="summary-key">Exam ${idx+1} — ${escapeHtml(occ.timestamp_utc||'')}</div><div class="summary-value">${escapeHtml(String(occ.correctCount||0))}/${escapeHtml(String(occ.totalQuestions||0))}</div></div>`;
+        });
+        leftHtml += `</div>`;
+      });
+    }
+    targetArea.innerHTML = leftHtml;
+
+    // right: totals and actions
+    document.getElementById('totalExams').textContent = out.countIncluded;
+    document.getElementById('totalCorrect').textContent = out.totals.correct;
+    document.getElementById('totalQuestions').textContent = out.totals.total;
+    const percent = out.totals.total ? Math.round((out.totals.correct/out.totals.total)*10000)/100 : 0;
+    document.getElementById('totalPercent').textContent = percent + '%';
+
+    // combined object for copy/download/send actions (latest up to 12)
+    const combinedObj = {
+      identity: raw,
+      monthId: out.monthId,
+      monthLabel: out.monthLabel,
+      examsIncluded: out.countIncluded,
+      totals: out.totals,
+      last12: out.last12
+    };
+
+    document.getElementById('btnCopyCombined').onclick = async ()=>{
+      try{ await navigator.clipboard.writeText(JSON.stringify(combinedObj,null,2)); alert('Combined JSON copied to clipboard'); }
+      catch(e){ alert('Copy failed — allow clipboard permission or download instead.'); }
+    };
+    document.getElementById('btnDownloadCombined').onclick = ()=>{
+      const blob = new Blob([JSON.stringify(combinedObj,null,2)],{type:'application/json'});
+      const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `combined-${out.monthId}-${encodeURIComponent(raw)}.json`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    };
+    document.getElementById('btnSendCombined').onclick = ()=>{
+      try{ navigator.clipboard.writeText(JSON.stringify(combinedObj,null,2)); }catch(e){}
+      const subject = encodeURIComponent('My combined exam results');
+      const body = encodeURIComponent('Dear developer,%0A%0APlease find my combined exam results (copied to clipboard). Please update the published result.json accordingly.%0A%0AThanks.');
+      window.location.href = `mailto:${encodeURIComponent('devspakle@gmail.com')}?subject=${subject}&body=${body}`;
+    };
+
+    // contextual hint
+    const missing = Math.max(0, 12 - out.countIncluded);
+    document.getElementById('combinedHint').textContent = missing > 0 ? `You have ${out.countIncluded} exams this month. ${missing} more exams needed to reach 12.` : `You have ${out.countIncluded} exams included (12 required). You can copy/download and send this JSON to the developer.`;
+  }
+
+  // ---------- recent exams view (detailed) ----------
+  function renderRecentExamsFor(raw, limit=10){
+    const area = document.getElementById('recentExamsArea');
+    const records = findPersonalRecordsByRaw(raw); // newest-first
+    if(!raw || !records.length){
+      area.innerHTML = `<div class="muted small">No recent exams found for identity: ${escapeHtml(raw||'none')}. Take an exam to populate this area.</div>`;
+      return;
+    }
+    const toShow = records.slice(0, limit);
+    let html = '';
+    toShow.forEach((r, idx)=>{
+      html += `<div class="exam-item">
+        <div class="exam-header">
+          <div>
+            <div style="font-weight:800">${escapeHtml(r.subjectName || r.subjectId)}</div>
+            <div class="exam-meta">${escapeHtml(r.timestamp_utc||'')} • ${escapeHtml(String(r.correctCount||0))}/${escapeHtml(String(r.totalQuestions||0))} • ${escapeHtml(String(r.timeTakenSec||0))}s</div>
+          </div>
+          <div style="text-align:right"><div class="muted small">Paper: ${escapeHtml(r.paperId||'—')}</div></div>
+        </div>`;
+
+      // per-question details (if present) in black pre
+      if(r.resultSheet && r.resultSheet.length){
+        html += `<details style="margin-top:8px"><summary style="cursor:pointer">View per-question details</summary><pre class="details">${escapeHtml(JSON.stringify(r.resultSheet,null,2))}</pre></details>`;
+      } else {
+        html += `<div class="muted small" style="margin-top:8px">No per-question details saved for this exam.</div>`;
+      }
+      html += `</div>`;
+    });
+    area.innerHTML = html;
+  }
+
+  // ---------- ranking area (result.json from server or local published) ----------
+  async function loadRankingMonths(){
+    // try fetch result.json (official)
+    try{
+      const r = await fetch('./result.json', {cache:'no-store'});
+      if(r.ok){
+        const jd = await r.json();
+        return jd.months || [];
+      }
+    }catch(e){}
+    // fallback to local published
+    const pub = readPublished();
+    const months = Object.keys(pub||{}).sort().reverse().map(k=>{
+      return { monthId: pub[k].monthId, label: pub[k].label, subjects: [ { subjectId:'combined', subjectName:'Combined Results', submissions: (pub[k].students||[]).map(s => ({ studentName: s.studentName, studentEmail: s.studentEmail, correctCount: s.totalCorrect, totalQuestions: s.totalQuestions, timeTakenSec: s.totalTimeSec, subjects: s.subjects })) } ] };
+    });
+    return months;
+  }
+
+  async function renderRankingUI(){
+    const months = await loadRankingMonths();
+    const timeline = document.getElementById('timeline');
+    const rankingArea = document.getElementById('rankingArea');
+    timeline.innerHTML = '';
+    rankingArea.innerHTML = '';
+
+    if(!months || months.length === 0){
+      document.getElementById('rankingHint').textContent = 'No published result.json found';
+      rankingArea.innerHTML = '<div class="muted small">Official ranking file (result.json) is not available. Once developer publishes it, this area will show official monthly rankings.</div>';
+      return;
+    }
+    document.getElementById('rankingHint').textContent = '';
+
+    // build timeline buttons
+    const allBtn = document.createElement('button'); allBtn.textContent = 'Latest'; allBtn.onclick = ()=> renderMonth(months[0]); timeline.appendChild(allBtn);
+    months.forEach(m => {
+      const btn = document.createElement('button'); btn.textContent = m.label || m.monthId; btn.onclick = ()=> renderMonth(m); timeline.appendChild(btn);
+    });
+
+    // render initial month
+    renderMonth(months[0]);
+
+    function renderMonth(m){
+      // mark active
+      Array.from(timeline.children).forEach(b=> b.classList.toggle('active', b.textContent === (m.label||m.monthId) || (b.textContent === 'Latest' && m === months[0])));
+      rankingArea.innerHTML = '';
+      // find "combined" subject if exists
+      const subs = m.subjects || [];
+      // flatten submissions for display (combined subjects assumed)
+      let rows = [];
+      subs.forEach(sub => {
+        (sub.submissions||[]).forEach(s => {
+          rows.push({ studentName: s.studentName || s.studentEmail || 'Anonymous', correctCount: s.correctCount||0, totalQuestions: s.totalQuestions||0, timeTakenSec: s.timeTakenSec||0, subjects: s.subjects||{}, resultSheet: s.resultSheet || null });
+        });
+      });
+      // sort by correct desc then time asc
+      rows.sort((a,b)=>{ if((b.correctCount||0) - (a.correctCount||0) !== 0) return (b.correctCount||0) - (a.correctCount||0); return (a.timeTakenSec||0) - (b.timeTakenSec||0); });
+      if(rows.length === 0){ rankingArea.innerHTML = '<div class="muted small">No ranking entries for this month.</div>'; return; }
+
+      // render
+      rows.forEach((r,i)=>{
+        const div = document.createElement('div'); div.className = 'rank-row';
+        div.innerHTML = `<div class="rank">${i+1}</div><div class="rank-info">${escapeHtml(r.studentName)}</div><div class="rank-stats">${r.correctCount||0}/${r.totalQuestions||0}</div>`;
+        div.onclick = ()=>{
+          // show per-subject breakdown or resultSheet
+          let details = '';
+          if(r.subjects && Object.keys(r.subjects).length) details = JSON.stringify(r.subjects, null, 2);
+          else if(r.resultSheet) details = JSON.stringify(r.resultSheet, null, 2);
+          else details = '{}';
+          // toggle a pre element after this row
+          if(div.nextSibling && div.nextSibling.tagName === 'PRE') div.parentNode.removeChild(div.nextSibling);
+          else {
+            const pre = document.createElement('pre'); pre.className = 'details'; pre.textContent = details;
+            div.parentNode.insertBefore(pre, div.nextSibling);
+            pre.scrollIntoView({behavior:'smooth', block:'nearest'});
+          }
+        };
+        rankingArea.appendChild(div);
+      });
+    }
+  }
+
+  // ---------- auto-run on page load ----------
+  (function initPage(){
+    // auto-detect current user
+    const raw = detectCurrentUserRaw();
+    // show month label & summary
+    document.getElementById('monthBadge').textContent = monthLabelFromId = monthLabel(currentMonthId());
+    renderMonthlySummaryBlock(raw);
+    renderRecentExamsFor(raw, 12);
+    renderRankingUI();
+  })();
+
+  // expose a manual "identify" trigger if user wants to provide alternate identity (hidden in UI, but could be added later)
+
+  // Back button behaviour
+  (function bindBack(){
+    const b = document.getElementById('btnBack');
+    if(!b) return;
+    b.addEventListener('click', ()=>{
+      try{ if(window.history.length>1) window.history.back(); else window.location.href = './index.html'; }catch(e){ window.location.href = './index.html'; }
+    });
+  })();
+  </script>
+</body>
+</html>
