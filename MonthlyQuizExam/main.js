@@ -6,7 +6,7 @@
 */
 
 /* ---------- CONFIG ---------- */
-const WEB3FORMS_ACCESS_KEY = "15226f34-3d7a-49c0-aa41-f2d8ece1a9ae";
+const WEB3FORMS_ACCESS_KEY = "e3d74ca3-dbd9-48ef-82a9-b617fd8537c4";
 const ADMIN_EMAIL = "devspakle@gmail.com";
 const EXAM_HOUR_DHAKA = 21; // 9 PM Dhaka
 const SHORT_SUBJECT_IDS = new Set(["higher-math","physics","chemistry","biology","ict"]); // 25-min subjects
@@ -385,26 +385,26 @@ async function sendSubmission(payload){
     timestamp_utc: payload.timestamp_utc || new Date().toISOString()
   };
 
-  const body = {
-    access_key: WEB3FORMS_ACCESS_KEY,
-    subject: `Exam Submission — ${payload.subjectName} — ${payload.paperId}`,
-    name: payload.studentName || "Anonymous",
-    email: payload.studentEmail || "",
-    content: JSON.stringify(contentObj, null, 2)
-  };
+  // Use Web3Forms recommended FormData POST (demo JS form flow)
+  const formData = new FormData();
+  formData.append('access_key', WEB3FORMS_ACCESS_KEY);
+  formData.append('name', payload.studentName || 'Anonymous');
+  formData.append('email', payload.studentEmail || '');
+  formData.append('subject', `Exam Submission — ${payload.subjectName} — ${payload.paperId}`);
+  // include the structured JSON inside 'content' so it appears in email body and as JSON text
+  formData.append('content', JSON.stringify(contentObj, null, 2));
 
-  if (WEB3FORMS_ACCESS_KEY === "WEB3FORMS_ACCESS_KEY"){
-    console.warn('WEB3FORMS_ACCESS_KEY is not set. Replace it to enable live submissions.');
-  }
+  // optional: include an extra admin field used for easier filtering
+  if (typeof ADMIN_EMAIL !== 'undefined') formData.append('adminEmail', ADMIN_EMAIL);
 
   try {
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify(body)
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
     });
     const json = await res.json();
     if (!res.ok || (json && json.success === false)) throw new Error(json && json.message ? json.message : 'Submission failed');
+    // success → showResult will redirect to congrats page
     showResult({ok:true, payload, resp:json});
   } catch (err) {
     showResult({ok:false, err});
