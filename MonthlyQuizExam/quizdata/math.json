@@ -1,0 +1,70 @@
+{
+  "papers": [
+    {
+      "paperId": "math-01",
+      "board": "BB22",
+      "questions": [
+        {
+          "id": "math-01-q1",
+          "text": "5 + 3 = ?",
+          "options": ["7","8","9","6"],
+          "answer": 1
+        },
+        {
+          "id": "math-01-q2",
+          "text": "12 ÷ 4 = ?",
+          "options": ["2","4","3","6"],
+          "answer": 2
+        },
+        {
+          "id": "math-01-q3",
+          "text": "7 × 6 = ?",
+          "options": ["42","36","48","40"],
+          "answer": 0
+        },
+        {
+          "id": "math-01-q4",
+          "text": "15 - 7 = ?",
+          "options": ["6","8","9","7"],
+          "answer": 1
+        },
+        {
+          "id": "math-01-q5",
+          "text": "9 + 10 = ?",
+          "options": ["18","20","19","21"],
+          "answer": 2
+        },
+        {
+          "id": "math-01-q6",
+          "text": "Square root of 64?",
+          "options": ["6","7","8","9"],
+          "answer": 2
+        },
+        {
+          "id": "math-01-q7",
+          "text": "5 × 5 = ?",
+          "options": ["20","25","30","15"],
+          "answer": 1
+        },
+        {
+          "id": "math-01-q8",
+          "text": "18 ÷ 3 = ?",
+          "options": ["5","6","7","8"],
+          "answer": 1
+        },
+        {
+          "id": "math-01-q9",
+          "text": "10 + 15 = ?",
+          "options": ["24","25","26","27"],
+          "answer": 1
+        },
+        {
+          "id": "math-01-q10",
+          "text": "2² = ?",
+          "options": ["2","4","6","8"],
+          "answer": 1
+        }
+      ]
+    }
+  ]
+}

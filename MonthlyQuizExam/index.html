@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ahoron — Monthly Quiz Exam</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">Ahoron — MonthlyQuizExam</div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <div class="small">Exams open daily at <strong>9:00 PM (Dhaka)</strong> — last 10 days of month</div>
+        <a class="btn" href="result.html" style="margin-left:12px">View Results</a>
+        <!-- TEST BUTTON (temporary, for quick testing) -->
+        <button id="btnTestExam" class="btn" style="margin-left:12px;background:linear-gradient(90deg,#fda4af,#ffd6a5);">Take Test Now (TEST)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-grid">
+    <section class="card schedule-card" id="scheduleCard">
+      <h2>Exam Routine</h2>
+      <div id="scheduleInfo" class="muted">Loading schedule...</div>
+      <ul id="scheduleList" class="schedule-list"></ul>
+      <div id="scheduleFooter" class="muted small"></div>
+    </section>
+
+    <section class="card exam-card" id="examCard">
+      <div id="examArea">
+        <div id="notExam" class="center muted">No exam right now. Come back at <strong>9:00 PM (Dhaka)</strong> on scheduled day.</div>
+        <div id="examWidget" class="hidden">
+          <div class="exam-header">
+            <div>
+              <h3 id="examTitle"></h3>
+              <div id="paperInfo" class="muted small"></div>
+            </div>
+            <div class="timer" id="examTimer">--:--</div>
+          </div>
+
+          <form id="questionsForm">
+            <div id="questionsList"></div>
+
+            <div class="exam-actions">
+              <input type="text" id="studentName" placeholder="Your name (optional)" />
+              <input type="email" id="studentEmail" placeholder="Email (optional — recommended)" />
+              <button type="button" id="submitBtn" class="btn">Submit Answers</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="resultWidget" class="hidden card result-card"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Built for Ahoron • Demo mode • Replace JSONs & Web3Forms key to go live</div>
+  </footer>
+
+  <!-- Congratulatory overlay (created/controlled by main.js) -->
+  <div id="congratsOverlay" class="congrats-overlay hidden" aria-hidden="true">
+    <div class="congrats-card">
+      <div class="heart">💖</div>
+      <div><h3>Congratulations!</h3></div>
+      <div class="muted">Your answers have been saved. Click below to view your result.</div>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button id="congratsViewBtn" class="btn">View Result</button>
+        <button id="congratsCloseBtn" class="btn" style="background:linear-gradient(90deg,#cbd5e1,#94a3b8)">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js" type="module"></script>
+</body>
+</html>
