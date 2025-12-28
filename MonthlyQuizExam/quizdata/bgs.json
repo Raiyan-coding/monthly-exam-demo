@@ -607,8 +607,7 @@
 
 
 
-        {
-  "papers": [
+    
     {
       "paperId": "chattogram-25",
       "board": "Chattogram-2025",
@@ -798,10 +797,8 @@
           "answer": 0
         }
       ]
-    }
-  ]
-},
-
+    },
+ 
 
 
 
